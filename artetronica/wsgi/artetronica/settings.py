@@ -60,17 +60,31 @@ WSGI_APPLICATION = 'artetronica.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
+#
+#DATABASES = {
+#        'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'basetronica5',                  
+#        'USER': 'root',             
+#        'PASSWORD': 'root',                  
+#        'HOST': '',                     
+#        'PORT': '',                      
+#    }
+#}
 
+import os
 DATABASES = {
-        'default': {
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'basetronica5',                  
-        'USER': 'root',             
-        'PASSWORD': 'root',                  
-        'HOST': '',                     
-        'PORT': '',                      
+        'NAME': os.environ['OPENSHIFT_APP_NAME'],
+        'USER': os.environ['OPENSHIFT_MYSQL_DB_USERNAME'],
+        'PASSWORD': os.environ['OPENSHIFT_MYSQL_DB_PASSWORD'],
+        'HOST': os.environ['OPENSHIFT_MYSQL_DB_HOST'],
+        'PORT': os.environ['OPENSHIFT_MYSQL_DB_PORT']
     }
 }
+
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
