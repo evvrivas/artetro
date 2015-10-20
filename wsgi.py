@@ -11,6 +11,18 @@ except IOError:
 # IMPORTANT: Put any additional includes below this line.  If placed above this
 # line, it's possible required libraries won't be in your searchable path
 #
+# new codes we adding for Django
+
+import sys
+import django.core.handlers.wsgi
+ 
+os.environ['DJANGO_SETTINGS_MODULE'] = os.environ['OPENSHIFT_APP_NAME']+'.settings'
+sys.path.append(os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'wsgi', os.environ['OPENSHIFT_APP_NAME']))
+application = django.core.handlers.wsgi.WSGIHandler()
+
+
+
+
 
 def application(environ, start_response):
 
